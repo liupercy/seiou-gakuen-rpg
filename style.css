@@ -1,0 +1,452 @@
+* {
+  box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent;
+}
+
+html,
+body {
+  margin: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  font-family: -apple-system, BlinkMacSystemFont, "Noto Sans TC", sans-serif;
+  background: #111827;
+  touch-action: none;
+}
+
+button {
+  font-family: inherit;
+}
+
+#game {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  background: linear-gradient(#9edcff, #dff4ff);
+}
+
+/* ===== 世界 ===== */
+
+#world {
+  position: absolute;
+  inset: 0;
+}
+
+#background {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  pointer-events: none;
+  user-select: none;
+}
+
+/* ===== 角色共用 ===== */
+
+.character {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  z-index: 20;
+}
+
+/* ===== 玩家 ===== */
+
+#player {
+  left: 50%;
+  top: 78%;
+  width: 58px;
+  height: 94px;
+}
+
+.player-head {
+  position: absolute;
+  width: 42px;
+  height: 42px;
+  left: 8px;
+  top: 0;
+  border-radius: 50% 50% 45% 45%;
+  background: #1c2436;
+  box-shadow: 0 3px 0 #ffd6c2 inset;
+}
+
+.player-head::after {
+  content: "";
+  position: absolute;
+  width: 29px;
+  height: 24px;
+  left: 7px;
+  top: 12px;
+  background: #ffd6c2;
+  border-radius: 45%;
+  z-index: -1;
+}
+
+.player-body {
+  position: absolute;
+  width: 38px;
+  height: 47px;
+  left: 10px;
+  top: 36px;
+  background: linear-gradient(#314361, #172238);
+  border-radius: 8px 8px 4px 4px;
+}
+
+.player-body::after {
+  content: "";
+  position: absolute;
+  width: 12px;
+  height: 14px;
+  left: 13px;
+  top: 3px;
+  background: #d7e0ec;
+  clip-path: polygon(0 0, 100% 0, 50% 100%);
+}
+
+.player-leg {
+  position: absolute;
+  top: 79px;
+  width: 9px;
+  height: 15px;
+  background: #172033;
+  border-radius: 0 0 5px 5px;
+}
+
+.player-leg.left {
+  left: 16px;
+}
+
+.player-leg.right {
+  right: 16px;
+}
+
+/* ===== 美咲 ===== */
+
+#misaki {
+  left: 38%;
+  top: 57%;
+  width: 58px;
+  height: 96px;
+}
+
+.npc-head {
+  position: absolute;
+  width: 44px;
+  height: 45px;
+  left: 7px;
+  top: 0;
+  background: #704657;
+  border-radius: 50% 50% 46% 46%;
+}
+
+.npc-head::after {
+  content: "";
+  position: absolute;
+  width: 29px;
+  height: 27px;
+  left: 8px;
+  top: 12px;
+  background: #ffd8c5;
+  border-radius: 45%;
+  z-index: -1;
+}
+
+.npc-body {
+  position: absolute;
+  width: 40px;
+  height: 48px;
+  left: 9px;
+  top: 37px;
+  background: linear-gradient(#354461, #1b2539);
+  border-radius: 8px 8px 3px 3px;
+}
+
+.npc-body::after {
+  content: "";
+  position: absolute;
+  width: 18px;
+  height: 15px;
+  left: 11px;
+  top: 5px;
+  background: #cf496a;
+  clip-path: polygon(50% 0, 100% 35%, 70% 100%, 50% 65%, 30% 100%, 0 35%);
+}
+
+.npc-leg {
+  position: absolute;
+  top: 81px;
+  width: 8px;
+  height: 15px;
+  background: #24283a;
+}
+
+.npc-leg.left {
+  left: 17px;
+}
+
+.npc-leg.right {
+  right: 17px;
+}
+
+.name-tag {
+  position: absolute;
+  left: 50%;
+  top: -31px;
+  transform: translateX(-50%);
+  padding: 4px 11px;
+  white-space: nowrap;
+  color: white;
+  font-weight: 700;
+  font-size: 13px;
+  border-radius: 8px;
+  background: rgba(19, 28, 49, .88);
+}
+
+/* ===== 左上 HUD ===== */
+
+#hud {
+  position: absolute;
+  top: 18px;
+  left: 18px;
+  z-index: 100;
+  min-width: 220px;
+  padding: 15px 18px;
+  color: white;
+  background: rgba(16, 25, 48, .82);
+  border: 1px solid rgba(255, 255, 255, .2);
+  border-radius: 17px;
+  backdrop-filter: blur(14px);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, .22);
+}
+
+.date {
+  font-size: 22px;
+  font-weight: 800;
+  margin-bottom: 7px;
+}
+
+.time {
+  font-size: 17px;
+  margin-bottom: 5px;
+}
+
+.location {
+  font-size: 14px;
+  opacity: .8;
+}
+
+/* ===== 任務 ===== */
+
+#quest {
+  position: absolute;
+  top: 150px;
+  left: 18px;
+  z-index: 100;
+  width: 240px;
+  padding: 14px 17px;
+  color: white;
+  background: rgba(16, 25, 48, .78);
+  border-radius: 15px;
+  backdrop-filter: blur(12px);
+}
+
+.quest-title {
+  color: #ffd267;
+  font-weight: 800;
+  margin-bottom: 8px;
+}
+
+/* ===== 右側選單 ===== */
+
+#menu {
+  position: absolute;
+  right: 20px;
+  top: 50%;
+  z-index: 100;
+  transform: translateY(-50%);
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+#menu button {
+  width: 58px;
+  height: 58px;
+  border: 1px solid rgba(255, 255, 255, .15);
+  border-radius: 16px;
+  color: white;
+  font-size: 24px;
+  background: rgba(17, 26, 49, .84);
+  backdrop-filter: blur(12px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, .2);
+}
+
+/* ===== 搖桿 ===== */
+
+#joystick {
+  position: absolute;
+  left: 30px;
+  bottom: 30px;
+  z-index: 150;
+  width: 140px;
+  height: 140px;
+  border: 2px solid rgba(255, 255, 255, .32);
+  border-radius: 50%;
+  background: rgba(19, 29, 52, .35);
+  backdrop-filter: blur(7px);
+}
+
+#joystick-knob {
+  position: absolute;
+  width: 64px;
+  height: 64px;
+  left: 38px;
+  top: 38px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, .72);
+  border: 2px solid rgba(255, 255, 255, .9);
+  box-shadow: 0 7px 20px rgba(0, 0, 0, .22);
+}
+
+/* ===== E ===== */
+
+#action {
+  position: absolute;
+  right: 40px;
+  bottom: 45px;
+  z-index: 160;
+  width: 80px;
+  height: 80px;
+  border: 0;
+  border-radius: 50%;
+  color: white;
+  font-size: 27px;
+  font-weight: 900;
+  background: rgba(255, 91, 148, .9);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, .25);
+}
+
+/* ===== 靠近 NPC ===== */
+
+#talkHint {
+  display: none;
+  position: absolute;
+  left: 50%;
+  bottom: 180px;
+  transform: translateX(-50%);
+  z-index: 170;
+  padding: 9px 18px;
+  color: white;
+  font-weight: 700;
+  border-radius: 12px;
+  background: rgba(16, 25, 48, .88);
+}
+
+/* ===== 對話 ===== */
+
+#dialog {
+  display: none;
+  position: absolute;
+  left: 50%;
+  bottom: 25px;
+  transform: translateX(-50%);
+  z-index: 300;
+  width: min(760px, 80vw);
+  min-height: 165px;
+}
+
+.dialog-main {
+  position: absolute;
+  left: 145px;
+  right: 0;
+  bottom: 0;
+  min-height: 150px;
+  padding: 38px 35px 25px;
+  color: #202a42;
+  font-size: 18px;
+  line-height: 1.65;
+  background: rgba(255, 255, 255, .96);
+  border: 3px solid #ff9fc1;
+  border-radius: 22px;
+  box-shadow: 0 18px 45px rgba(0, 0, 0, .25);
+}
+
+#dialogName {
+  position: absolute;
+  top: -23px;
+  left: 25px;
+  padding: 8px 30px;
+  color: white;
+  font-weight: 800;
+  background: #ff79aa;
+  border-radius: 13px;
+}
+
+#nextDialog {
+  position: absolute;
+  right: 15px;
+  bottom: 10px;
+  border: 0;
+  color: #ff6c9f;
+  font-size: 18px;
+  background: transparent;
+}
+
+#portrait {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  z-index: 2;
+  width: 175px;
+  height: 220px;
+}
+
+.portrait-hair {
+  position: absolute;
+  left: 27px;
+  top: 10px;
+  width: 125px;
+  height: 145px;
+  border-radius: 48% 48% 35% 35%;
+  background: #714654;
+}
+
+.portrait-face {
+  position: absolute;
+  left: 47px;
+  top: 45px;
+  width: 85px;
+  height: 100px;
+  border-radius: 45% 45% 48% 48%;
+  background: #ffd9c8;
+}
+
+/* ===== iPad / 手機 ===== */
+
+@media (max-width: 800px) {
+  #hud {
+    transform: scale(.82);
+    transform-origin: top left;
+  }
+
+  #quest {
+    top: 125px;
+    transform: scale(.82);
+    transform-origin: top left;
+  }
+
+  #menu {
+    transform: translateY(-50%) scale(.82);
+    transform-origin: right center;
+  }
+
+  #joystick {
+    transform: scale(.82);
+    transform-origin: bottom left;
+  }
+
+  #action {
+    transform: scale(.82);
+    transform-origin: bottom right;
+  }
+}
